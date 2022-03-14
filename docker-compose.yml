@@ -1,0 +1,33 @@
+version: '2'
+
+services:
+  # PostgreSQL database
+  db:
+    image: postgres:9.4
+    hostname: db
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+      - POSTGRES_DB=postgres
+    ports:
+      - "5432:5432"
+
+ 
+  # Django web server
+  web:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    hostname: web
+    command: ./run_web.sh
+    volumes:
+      - .:/app  # mount current directory inside container
+    ports:
+      - "8080:8080"
+    # set up links so that web knows about db
+    links:
+      - db
+    depends_on:
+      - db
+
+  
