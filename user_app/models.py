@@ -5,7 +5,7 @@ from django.urls import reverse
 class UserAcount(models.Model):
     first_name = models.CharField(max_length=200)
     last_name = models.CharField(max_length=200)
-    IBAN = models.CharField(max_length=14)
+    IBAN = models.CharField(max_length=22)
     created_by = models.CharField(max_length=14)
 
     def __str__(self):
